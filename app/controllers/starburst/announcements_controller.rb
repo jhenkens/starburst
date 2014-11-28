@@ -7,7 +7,7 @@ module Starburst
       if announcement
         if respond_to?(Starburst.current_user_method) && (current_user = send(Starburst.current_user_method))
           add_cookie_ids_to_user(current_user)
-          if AnnouncementView.first_or_create(:user => current_user, :announcement => announcement)
+          if AnnouncementView.where(:user => current_user, :announcement => announcement).first_or_create.persisted?
             render :json => :ok
           else
             render json: nil, :status => :unprocessable_entity
