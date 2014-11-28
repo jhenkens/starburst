@@ -60,7 +60,7 @@ module Starburst
 
     def self.user_matches_conditions(user, conditions = nil)
       if conditions
-        conditions.find_each do |condition|
+        conditions.each do |condition|
           if user[condition[:field]] != condition[:value]
             return false
           end
