@@ -48,6 +48,11 @@ describe Announcement do
       expect(Announcement.current.blank?).to eq true
     end
 
+    it "does not show when it is excluded" do
+      announcement = Announcement.create(:start_delivering_at => Time.now, :stop_delivering_at => Time.now)
+      expect(Announcement.without_ids([announcement.id]).blank?).to eq true
+    end
+
   end
 
   context "an announcement not yet read by the current user" do
